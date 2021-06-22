@@ -1,0 +1,24 @@
+.promo {
+  min-height: 524px;
+  background-color: #073042;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.promo__header {
+  max-width: 730px;
+  font-size: 50px;
+  color: #fff;
+  margin: auto;
+  z-index: 2;
+  text-align: center;
+}
+
+.promo__logo {
+  height: 320px;
+  width: 320px;
+  position: absolute;
+  top: calc(50% - 160px);
+  left: calc(50% - 160px);
+}
