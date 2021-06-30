@@ -2,41 +2,42 @@ import './Techs.css';
 
 import LandingBlock from '../LandingBlock/LandingBlock';
 
-function Techs() {
+function Techs({ blockStyle }) {
 
   return (
     <LandingBlock
       name="techs"
       title="Технологии"
+      blockStyle={ blockStyle }
     >
-      <div className="techs__description">
-          <h3>
+      <div className="techs">
+          <h3 className="techs__subtitle">
             7 технологий
           </h3>
-          <p>
+          <p className="techs__description">
             На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
           </p>
-          <ul>
-            <li>
+          <ul className="techs__list">
+            <li className="techs__list-element">
               HTML
             </li>
-            <li>
+            <li className="techs__list-element">
               CSS
             </li>
-            <li>
+            <li className="techs__list-element">
               JS
             </li>
-            <li>
+            <li className="techs__list-element">
               React
             </li>
-            <li>
+            <li className="techs__list-element">
               Git
             </li>
-            <li>
+            <li className="techs__list-element">
               Express.js
             </li>
-            <li>
-              MongoDB
+            <li className="techs__list-element">
+              mongoDB
             </li>
           </ul>
         </div>

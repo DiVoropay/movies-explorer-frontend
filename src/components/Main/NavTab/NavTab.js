@@ -1,21 +1,23 @@
 import './NavTab.css';
 
-function NavTab({ links }) {
+import LandingBlock from '../LandingBlock/LandingBlock';
+
+function NavTab({ links, blockStyle }) {
 
   return (
-    <section className="nav-tab">
+    <LandingBlock blockStyle={ blockStyle }>
+      <div className="nav-tab">
 
-      <ul>
-        {links.map((link) => (
-            <li>
-              <a className="nav-tab__link" href={link.name}>{link.title}</a>
-            </li>
-        )
-        )
-        }
-      </ul>
+        <ul className="nav-tab__list">
+          {links.map((link) => (
+              <li className="nav-tab__element" key={link.title}>
+                <a className="nav-tab__link" href={link.href}>{link.title}</a>
+              </li>
+          ))}
+        </ul>
 
-    </section>
+      </div>
+    </LandingBlock>
   );
 }
 

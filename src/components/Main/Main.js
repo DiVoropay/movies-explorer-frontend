@@ -14,18 +14,19 @@ function Main() {
       <Promo />
 
       <NavTab
+        blockStyle="gray"
         links={ [
-          { name: "about-project", title: "О проекте"},
-          { name: "techs", title: "Технологии" },
-          { name: "about-me", title: "Студент" }
+          { href: "#about-project", title: "О проекте"},
+          { href: "#techs", title: "Технологии" },
+          { href: "#about-me", title: "Студент" }
         ] }
       >
       </NavTab>
 
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
+      <AboutProject/>
+      <Techs blockStyle="gray" />
+      <AboutMe/>
+      <Portfolio/>
 
     </main>
   );

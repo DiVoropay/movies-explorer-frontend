@@ -4,7 +4,7 @@ function Promo() {
 
   return (
     <section className="promo">
-      <h1 className="promo__header">
+      <h1 className="promo__title">
         Учебный проект студента факультета Веб-разработки.
       </h1>
       <svg className="promo__logo" width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,0 +1,9 @@
+.movies {
+  background-color: #202020;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 70px;
+  align-items: center;
+  width: calc(100% - 140px);
+}

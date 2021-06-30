@@ -1,16 +1,18 @@
 .promo {
   min-height: 524px;
+  max-width: 100%;
   background-color: #073042;
   display: flex;
   position: relative;
   align-items: center;
+  justify-content: center;
+  padding: 0 70px;
 }
 
-.promo__header {
+.promo__title {
   max-width: 730px;
   font-size: 50px;
   color: #fff;
-  margin: auto;
   z-index: 2;
   text-align: center;
 }
@@ -21,4 +23,14 @@
   position: absolute;
   top: calc(50% - 160px);
   left: calc(50% - 160px);
+}
+
+@media screen and (max-width: 480px)  {
+  .promo {
+    padding: 0 18px;
+  }
+
+  .promo__title {
+    font-size: 31px;
+  }
 }

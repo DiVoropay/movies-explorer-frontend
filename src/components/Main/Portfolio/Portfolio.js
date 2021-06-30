@@ -1,28 +1,32 @@
 import './Portfolio.css';
 
-function Portfolio() {
+import LandingBlock from '../LandingBlock/LandingBlock';
+
+import student from '../../../data/studentData';
+
+function Portfolio({ blockStyle }) {
 
   return (
-    <div className="Portfolio">
+    <LandingBlock blockStyle={ blockStyle }>
+      <div className="portfolio">
 
-      <div>
-        <h3>
-          Портфолио
-        </h3>
-        <ul>
-          <li>
-            Статичный сайт
-          </li>
-          <li>
-            Адаптивный сайт
-          </li>
-          <li>
-            Одностраничное приложение
-          </li>
-        </ul>
+          <h3 className="portfolio__subtitle">
+            Портфолио
+          </h3>
+
+          <ul className="portfolio__list">
+            {student.portfolio.map((link) => (
+                <li className="portfolio__list-element" key={`portfolio${link.title}`}>
+                  <a className="portfolio__list-link" target="_blank" rel="noreferrer" href={link.href}>
+                    <p>{link.title}</p>
+                    <p>↗</p>
+                  </a>
+                </li>
+            ))}
+          </ul>
+
       </div>
-
-    </div>
+    </LandingBlock>
   );
 }
 

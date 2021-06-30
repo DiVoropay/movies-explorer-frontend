@@ -1,0 +1,97 @@
+.search-form {
+  padding: 80px 0px;
+  display: grid;
+  grid-template-columns: minmax(70%, 100%) 44px;
+  grid-template-rows: 50px;
+  gap: 40px 10px;
+  grid-template-areas:
+    'input submit'
+    'checkbox checkbox'
+  ;
+  align-items: center;
+  width: 100%;
+}
+
+.search-form__input {
+  grid-area: input;
+  background-color: #2f2f2f;
+  font-size: 14px;
+  line-height: 50px;
+  color: #8b8b8b;
+  border: none;
+  border-radius: 8px;
+  padding-left: 20px;
+}
+
+.search-form__switcher {
+  grid-area: checkbox;
+  text-align: center;
+  justify-self: center;
+  padding-bottom: 40px;
+}
+
+.search-form__border {
+  grid-area: checkbox;
+  width: 100%;
+  border-bottom: 1px solid #424242;
+  padding-bottom: 40px;
+}
+
+.switcher__checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.switcher__custom-checkbox {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #2f2f2f;
+  border-radius: 16px;
+  width: 36px;
+  height: 20px;
+  background-size: 18px;
+  margin-right: 12px;
+}
+
+.switcher__custom-checkbox::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 16px;
+  width: 16px;
+  height: 16px;
+  background-color: #2f2f2f;
+}
+
+.switcher__checkbox:checked + .switcher__custom-checkbox::before {
+  left: 18px;
+  background-color: #3DDC84;
+}
+
+.switcher__checkbox:focus + .switcher__custom-checkbox {
+  border: 1px solid #3DDC84;
+}
+
+.switcher__text {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #fff;
+}
+
+
+.search-form__button {
+  grid-area: submit;
+  background-image: url('../../images/search-button.svg');
+  background-color: transparent;
+  background-position: center;
+  border: none;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+}

@@ -1,5 +1,156 @@
+.navigation {
+  display: flex;
+  align-items: center;
+}
+
+.navigation__menu {
+  display: flex;
+  align-items: center;
+}
+
 .navigation__link {
   color: #fff;
   margin-left: 20px;
   text-decoration: none;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+}
+
+.navigation__navlink {
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+}
+
+.navigation__navlink-main {
+  display: none;
+}
+
+.navigation__navlink_active {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.navigation__login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3ddc84;
+  height: 32px;
+  min-width: 76px;
+  border-radius: 3px;
+}
+
+.navigation__account {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 2px solid rgba(170, 170, 170, .2);
+  height: 32px;
+  width: 100px;
+  border-radius: 50px;
+  box-sizing: content-box;
+  margin-left: 30px;
+}
+
+.navigation__account::before {
+  content: '';
+  width: 12px;
+  height: 14px;
+  background-repeat: no-repeat;
+  background-image: url('../../images/account_icon.svg');
+}
+
+.navigation__menu-button {
+  display: none;
+  border: none;
+  background-color: transparent;
+  width: 44px;
+  height: 44px;
+  background-repeat: no-repeat;
+  background-image: url('../../images/nav-menu-button.svg');
+}
+
+.navigation__close-button {
+  display: none;
+  border: none;
+  background-color: transparent;
+  width: 44px;
+  height: 44px;
+  background-repeat: no-repeat;
+  background-image: url('../../images/close-icon.svg');
+}
+
+@media screen and (max-width: 768px)  {
+
+  .navigation__menu {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    flex-direction: column;
+    justify-content: start;
+    height: 100vh;
+    min-width: 520px;
+    padding: 159px 0 90px;
+    background-color: #202020;
+    z-index: 2;
+  }
+
+  .navigation__menu_visible {
+    display: flex;
+  }
+
+  .navigation__menu-button {
+    display: block;
+  }
+
+  .navigation__close-button {
+    display: block;
+    position: absolute;
+    top: 23px;
+    right: 23px;
+  }
+
+  .navigation__navlink {
+    margin-left: 0;
+    margin-bottom: 28px;
+    font-size: 18px;
+  }
+
+  .navigation__navlink-main {
+    display: block;
+  }
+
+  .navigation__account {
+    margin-left: 0;
+    margin-top: 50%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px)  {
+  .navigation__menu {
+    min-width: 100%;
+    padding: 159px 0 90px;
+    background-color: #202020;
+    z-index: 2;
+  }
+
+  .navigation__link {
+    font-size: 10px;
+  }
+
+  .navigation__login {
+    height: 26px;
+    min-width: 54px;
+  }
+
+  .navigation__navlink {
+    font-size: 10px;
+  }
 }
