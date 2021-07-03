@@ -88,10 +88,22 @@
 .search-form__button {
   grid-area: submit;
   background-image: url('../../images/search-button.svg');
+  background-repeat: no-repeat;
   background-color: transparent;
   background-position: center;
   border: none;
   box-sizing: border-box;
   width: 44px;
   height: 44px;
+}
+
+.search-form__button:hover {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.search-form__button:active {
+  filter: none;
+  border: 2px solid #fff;
+  background-size: 95%;
+  border-radius: 7px;
 }
