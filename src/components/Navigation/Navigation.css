@@ -14,7 +14,7 @@
   text-decoration: none;
   font-size: 14px;
   line-height: 1.21;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .navigation__navlink {
@@ -43,6 +43,7 @@
   height: 32px;
   min-width: 76px;
   border-radius: 3px;
+  color: #000;
 }
 
 .navigation__account {
