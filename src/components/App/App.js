@@ -4,6 +4,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -16,52 +17,62 @@ import PageNoteFound from '../PageNoteFound/PageNoteFound';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
+  const [loggedIn, setLoggedIn] = React.useState(true); // temp
 
   return (
     <div className="App">
-      <Switch>
-        <Route path="/signup">
-          <Register />
-        </Route>
 
-        <Route path="/signin">
-          <Login />
-        </Route>
+      <CurrentUserContext.Provider value={currentUser}>
 
-        <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+
+          <Route path="/signup">
+            <Register />
+          </Route>
+
+          <Route path="/signin">
+            <Login />
+          </Route>
 
           <Route path="/">
+
             <Header />
 
             <Switch>
-              <Route path="/movies">
+
+              <ProtectedRoute path="/movies" loggedIn={loggedIn}>
                 <Movies />
-              </Route>
+              </ProtectedRoute>
 
-              <Route path="/saved-movies">
+              <ProtectedRoute path="/saved-movies"  loggedIn={loggedIn}>
                 <SavedMovies />
-              </Route>
+              </ProtectedRoute>
 
-              <Route path="/profile">
+              <ProtectedRoute path="/profile"  loggedIn={loggedIn}>
                 <Profile isNestedForm={true} />
-              </Route>
+              </ProtectedRoute>
 
-              <Route path="/">
+              <Route exact path="/">
                 <Main />
               </Route>
+
+              <Route path="*">
+                <PageNoteFound />
+              </Route>
+
             </Switch>
 
             <Footer />
+
           </Route>
 
           <Route path="*">
             <PageNoteFound />
           </Route>
 
-        </CurrentUserContext.Provider>
+        </Switch>
 
-
-      </Switch>
+      </CurrentUserContext.Provider>
 
     </div>
   );
