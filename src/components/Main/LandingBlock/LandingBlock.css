@@ -1,0 +1,49 @@
+.landing-block {
+  padding: 0 70px;
+}
+
+.landing-block_gray {
+  background-color: #272727;
+}
+
+.landing-block__header {
+  padding: 110px 0 23px 0;
+  margin-bottom: 66px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #dadada
+}
+
+.landing-block__title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.21;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 768px)  {
+
+  .landing-block {
+    padding: 0 50px;
+  }
+
+}
+
+@media screen and (max-width: 480px)  {
+
+  .landing-block_gray {
+    background: none;
+  }
+
+  .landing-block {
+    padding: 0 18px;
+  }
+
+  .landing-block__header {
+    padding: 70px 0 28px 0;
+  }
+
+  .landing-block__title {
+    font-size: 18px;
+  }
+
+}

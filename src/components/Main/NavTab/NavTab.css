@@ -1,0 +1,27 @@
+.nav-tab {
+  display: flex;
+  padding: 24px auto;
+}
+.nav-tab__list {
+  margin: 24px auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 40px 24px;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+}
+
+.nav-tab__link {
+  margin: 0;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.23;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 480px)  {
+  .nav-tab__link {
+    font-size: 11px;
+  }
+}

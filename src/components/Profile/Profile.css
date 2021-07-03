@@ -1,0 +1,14 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 0;
+}
+
+.profile__logout {
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+  text-decoration: none;
+  color: #ee3465;
+}

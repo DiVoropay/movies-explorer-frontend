@@ -1,0 +1,106 @@
+.movies-card {
+  display: grid;
+  max-width: 360px;
+  grid-template-columns: 7fr 1fr;
+  grid-template-rows: 54px 200px 65px;
+  grid-template-areas:
+    'title duration'
+    'image image'
+    'button button'
+  ;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #222;
+}
+
+.movies-card__title {
+  grid-area: title;
+  margin: 18px;
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movies-card__duration {
+  grid-area: duration;
+  margin: 18px;
+  font-size: 13px;
+  line-height: 1.38;
+  font-weight: 400;
+  color: #8b8b8b;
+  text-align: end;
+}
+
+.movies-card__image {
+  justify-self: center;
+  grid-area: image;
+  overflow: hidden;
+  max-height: 200px;
+  max-width: 100%;
+}
+
+.movies-card__button {
+  grid-area: button;
+  position: relative;
+  justify-self: center;
+  width: 100px;
+  height: 29px;
+  background-color: #313131;
+  background-position: center;
+  border: none;
+  border-radius: 30px;
+  box-sizing: border-box;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 400;
+  color: #fff;
+}
+
+.movies-card__button_unsaved::before {
+  position:relative;
+  content: 'Сохранить';
+}
+
+.movies-card__button_saved {
+  position:relative;
+  background-image: url('../../images/saved-button-icon-v.svg');
+  background-repeat: no-repeat;
+  background-color: #ee3465;
+}
+
+.movies-card__button_remove {
+  position:relative;
+  background-image: url('../../images/saved-button-icon-x.svg');
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 960px)  {
+
+  .movies-card {
+    max-width: 342px;
+  }
+
+}
+
+@media screen and (max-width: 640px)  {
+
+  .movies-card {
+    max-width: 300px;
+  }
+
+  .movies-card__title {
+    font-size: 12px;
+  }
+
+  .movies-card__duration {
+    font-size: 10px;
+  }
+
+  .movies-card__button {
+    font-size: 11px;
+  }
+
+}
