@@ -1,6 +1,8 @@
 import './App.css';
 
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -13,6 +15,7 @@ import Profile from '../Profile/Profile';
 import PageNoteFound from '../PageNoteFound/PageNoteFound';
 
 function App() {
+  const [currentUser, setCurrentUser] = React.useState({});
 
   return (
     <div className="App">
@@ -25,33 +28,38 @@ function App() {
           <Login />
         </Route>
 
-        <Route path="/">
-          <Header />
+        <CurrentUserContext.Provider value={currentUser}>
 
-          <Switch>
-            <Route path="/movies">
-              <Movies />
-            </Route>
+          <Route path="/">
+            <Header />
 
-            <Route path="/saved-movies">
-              <SavedMovies />
-            </Route>
+            <Switch>
+              <Route path="/movies">
+                <Movies />
+              </Route>
 
-            <Route path="/profile">
-              <Profile isNestedForm={true} />
-            </Route>
+              <Route path="/saved-movies">
+                <SavedMovies />
+              </Route>
 
-            <Route path="/">
-              <Main />
-            </Route>
-          </Switch>
+              <Route path="/profile">
+                <Profile isNestedForm={true} />
+              </Route>
 
-          <Footer />
-        </Route>
+              <Route path="/">
+                <Main />
+              </Route>
+            </Switch>
 
-        <Route path="*">
-          <PageNoteFound />
-        </Route>
+            <Footer />
+          </Route>
+
+          <Route path="*">
+            <PageNoteFound />
+          </Route>
+
+        </CurrentUserContext.Provider>
+
 
       </Switch>
 
