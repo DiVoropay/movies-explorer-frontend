@@ -5,10 +5,20 @@ import { Link } from 'react-router-dom';
 
 import Form from '../Form/Form'
 
-function Profile({ currentUser = {name: 'Незнакомец'}, onRegisterUser, isNestedForm }) {
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
+function Profile({ onUpdateUser, isNestedForm, onSignOut }) {
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   const [name, setName] = React.useState();
   const [email, setEmail] = React.useState();
+
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+
+  },[currentUser])
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -20,7 +30,7 @@ function Profile({ currentUser = {name: 'Незнакомец'}, onRegisterUser,
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegisterUser({
+    onUpdateUser({
       name,
       email
     });
@@ -65,7 +75,7 @@ function Profile({ currentUser = {name: 'Незнакомец'}, onRegisterUser,
           </label>
       </Form>
 
-      <Link className="profile__logout" to="./signin">Выйти из аккаунта</Link>
+      <Link className="profile__logout" onClick={onSignOut} to="./">Выйти из аккаунта</Link>
 
     </div>
   );
