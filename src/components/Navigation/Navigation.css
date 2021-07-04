@@ -99,7 +99,7 @@
     min-width: 520px;
     padding: 159px 0 90px;
     background-color: #202020;
-    z-index: 2;
+    z-index: 10;
   }
 
   .navigation__menu_visible {
