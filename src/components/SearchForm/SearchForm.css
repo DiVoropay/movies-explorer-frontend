@@ -15,12 +15,28 @@
 .search-form__input {
   grid-area: input;
   background-color: #2f2f2f;
+  color: #fff;
   font-size: 14px;
   line-height: 50px;
-  color: #8b8b8b;
   border: none;
+  box-sizing: border-box;
   border-radius: 8px;
   padding-left: 20px;
+}
+
+.search-form__phrase-error {
+  grid-area: input;
+  position: relative;
+  top: 40px;
+  left: 0;
+  color: #ee3465;
+  font-size: 14px;
+  line-height: 1.21px;
+  padding-left: 20px;
+}
+
+.search-form__input::placeholder {
+  color: #8b8b8b;
 }
 
 .search-form__switcher {
@@ -77,13 +93,18 @@
   border: 1px solid #3DDC84;
 }
 
+.switcher__checkbox:disabled + .switcher__custom-checkbox::before {
+  border: 1px solid #2f2f2f;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
 .switcher__text {
   font-size: 12px;
   line-height: 1.5;
   font-weight: 400;
   color: #fff;
 }
-
 
 .search-form__button {
   grid-area: submit;

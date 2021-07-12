@@ -1,0 +1,33 @@
+
+.data-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-not-found__code {
+  margin: 0;
+  font-size: 140px;
+  line-height: 1.21;
+  font-weight: 400;
+
+}
+
+.data-not-found__text {
+  font-size: 16px;
+  line-height: 1.21;
+  font-weight: 400;
+  text-align: center;
+}
+
+@media screen and (max-width: 480px)  {
+  .data-not-found__code {
+    margin-top: calc(40vh - 40px);
+    font-size: 80px;
+  }
+
+  .data-not-found__text {
+    font-size: 12px;
+  }
+
+}

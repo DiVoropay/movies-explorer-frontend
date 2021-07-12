@@ -42,6 +42,12 @@
   max-width: 100%;
 }
 
+.movies-card__trailer {
+  grid-area: image;
+  height: 100%;
+  z-index: 2;
+}
+
 .movies-card__button {
   grid-area: button;
   position: relative;

@@ -3,24 +3,30 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader'
+import React from 'react';
 
-import savedMoviesCards from '../../data/savedMoviesCards';
+function Movies({ onSearchMovies, isWaitingResponse, savedMovies, onUnSavingMovies }) {
 
-function Movies({ isWaitingResponse }) {
+  React.useEffect(()=> {
+    onSearchMovies({phrase:'', isShort: false});
+  },[]);
 
   return (
     <main className="saved-movies">
 
-      <SearchForm />
-
-      {isWaitingResponse
-      ?
-      <Preloader />
-      :
-      <MoviesCardList
-        moviesCards={savedMoviesCards}
+      <SearchForm
+        onSearchMovies={onSearchMovies}
         isSavedMoviesPage={true}
       />
+
+      {isWaitingResponse && <Preloader /> }
+      {savedMovies.length ?
+        <MoviesCardList
+          moviesCards={savedMovies}
+          isSavedMoviesPage={true}
+          onUnSavingMovies={onUnSavingMovies}
+        />
+        : null
       }
 
     </main>
