@@ -7,7 +7,7 @@ import Form from '../Form/Form'
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ onUpdateUser, isNestedForm, onSignOut }) {
+function Profile({ onUpdateUser, isNestedForm, onSignOut, serverError }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -19,6 +19,7 @@ function Profile({ onUpdateUser, isNestedForm, onSignOut }) {
         textBtn="Редактировать"
         onSubmit={onUpdateUser}
         isNestedForm={isNestedForm}
+        serverError={serverError}
         inputs={[
           {
           title: 'Имя',

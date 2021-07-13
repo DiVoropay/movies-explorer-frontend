@@ -35,6 +35,7 @@ function App() {
     const password = data.password;
 
     setServerError('');
+    setIsWaitingResponse(true);
 
     mainApi.register(data)
       .then((data) => {
@@ -49,6 +50,8 @@ function App() {
 
   function handleLoginUser(data) {
     setServerError('');
+    setIsWaitingResponse(true);
+
     mainApi.login(data)
       .then((data) => {
         localStorage.setItem('token', data.token);
@@ -79,11 +82,17 @@ function App() {
   }
 
   function handleUpdateUser (data) {
+    setServerError('');
+    setIsWaitingResponse(true);
+
     mainApi.setUserInfo(data, currentToken)
       .then((data) => {
         setCurrentUser(data);
       })
-      .catch((err) => { console.log(`Ошибка: ${err}`) });
+      .catch((err) => {
+        setServerError(err);
+        console.log(`Ошибка: ${err}`)
+      });
   }
 
   function handleExitUser() {
@@ -93,6 +102,7 @@ function App() {
   }
 
   function getMoviesList() {
+    setServerError('');
 
     return moviesApi.getMovies()
       .then((data) => {
@@ -171,6 +181,7 @@ function App() {
   }
 
   function getSavedMovies() {
+    setServerError('');
 
     return mainApi.getSavedMovies(currentToken)
       .then((data) => {
@@ -221,10 +232,10 @@ function App() {
 
   React.useEffect(() => {
     setIsWaitingResponse(false);
-  }, [filteredMovies]);
+  });
 
   React.useEffect(() => {
-    setServerError('');
+    isWaitingResponse && setServerError('');
   },[isWaitingResponse])
 
   return (
@@ -285,6 +296,7 @@ function App() {
                   isNestedForm={true}
                   onSignOut={handleExitUser}
                   onUpdateUser={handleUpdateUser}
+                  serverError={serverError}
                 />
               </ProtectedRoute>
 
