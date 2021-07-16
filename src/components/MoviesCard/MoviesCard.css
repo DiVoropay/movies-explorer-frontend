@@ -35,6 +35,7 @@
 }
 
 .movies-card__image {
+  position: relative;
   justify-self: center;
   grid-area: image;
   overflow: hidden;
@@ -63,6 +64,11 @@
   line-height: 1;
   font-weight: 400;
   color: #fff;
+}
+
+.movies-card__button:hover {
+  cursor: pointer;
+  opacity: .8;
 }
 
 .movies-card__button_unsaved::before {

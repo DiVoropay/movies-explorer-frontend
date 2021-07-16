@@ -1,4 +1,5 @@
 import './Movies.css';
+import React from 'react';
 
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -12,8 +13,23 @@ function Movies({
     onSavingMovies,
     onUnSavingMovies,
     serverError
-  })
-  {
+  }) {
+
+  const [ findError, setFindError ] = React.useState('');
+
+  React.useEffect(() => {
+    if (serverError !== '') {
+      setFindError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+    } else if (!filteredMovies.length) {
+      setFindError('Ничего не найдено')
+    }
+
+  },[isWaitingResponse]);
+
+  React.useEffect(() => {
+    setFindError('')
+  },[]);
+
   return (
     <main className="movies">
 
@@ -29,11 +45,7 @@ function Movies({
         onUnSavingMovies={onUnSavingMovies}
       />
       : <DataNotFound
-          message={
-            serverError
-            ? 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
-            : 'Ничего не найдено'
-          }
+          message={findError}
         />
       }
 

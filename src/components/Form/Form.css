@@ -126,6 +126,7 @@
 
 .form__button-submit:enabled:hover {
   cursor: pointer;
+  opacity: .8;
 }
 
 .form__button-submit_nested-form {

@@ -22,19 +22,20 @@ function App() {
   const [ currentUser, setCurrentUser ] = React.useState({});
   const [ loggedIn, setLoggedIn ] = React.useState(false);
   const [ currentToken, setCurrentToken ] = React.useState('');
-  const [ moviesList, setMoviesList ] = React.useState({});
-  const [ filteredMovies, setFilteredMovies ] = React.useState({});
-  const [ savedMovies, setSavedMovies ] = React.useState({});
-  const [ filteredSavedMovies, setFilteredSavedMovies ] = React.useState({});
+
+  const [ moviesList, setMoviesList ] = React.useState([]);
+  const [ filteredMovies, setFilteredMovies ] = React.useState([]);
+  const [ savedMovies, setSavedMovies ] = React.useState([]);
+  const [ filteredSavedMovies, setFilteredSavedMovies ] = React.useState([]);
+
   const [ isWaitingResponse, setIsWaitingResponse ] = React.useState(false);
-  const [ serverError, setServerError ] = React.useState('');
+  const [ apiError, setApiError ] = React.useState('');
 
   const history = useHistory();
 
   function handleRegisterUser(data) {
     const password = data.password;
 
-    setServerError('');
     setIsWaitingResponse(true);
 
     mainApi.register(data)
@@ -43,13 +44,12 @@ function App() {
         handleLoginUser({ password, email })
       })
       .catch((err) => {
-        setServerError(err);
+        setApiError(err);
         console.log(`Ошибка: ${err}`)
       });
   }
 
   function handleLoginUser(data) {
-    setServerError('');
     setIsWaitingResponse(true);
 
     mainApi.login(data)
@@ -58,7 +58,7 @@ function App() {
         loginByToken();
       })
       .catch((err) => {
-        setServerError(err);
+        setApiError(err);
         console.log(`Ошибка: ${err}`)
       });
   }
@@ -82,7 +82,7 @@ function App() {
   }
 
   function handleUpdateUser (data) {
-    setServerError('');
+
     setIsWaitingResponse(true);
 
     mainApi.setUserInfo(data, currentToken)
@@ -90,7 +90,7 @@ function App() {
         setCurrentUser(data);
       })
       .catch((err) => {
-        setServerError(err);
+        setApiError(err);
         console.log(`Ошибка: ${err}`)
       });
   }
@@ -102,7 +102,6 @@ function App() {
   }
 
   function getMoviesList() {
-    setServerError('');
 
     return moviesApi.getMovies()
       .then((data) => {
@@ -126,7 +125,7 @@ function App() {
         return movies;
       })
       .catch((err) => {
-        setServerError(err);
+        setApiError(err);
         console.log(`Ошибка: ${err}`)
       });
   }
@@ -134,7 +133,7 @@ function App() {
   function handleSearchMovies(inputs) {
     setIsWaitingResponse(true);
 
-    if (JSON.stringify(moviesList) !== '{}') {
+    if (moviesList.length) {
       setFilteredMovies(expandMoviesList(filterMovies(inputs, moviesList)));
     } else {
       getMoviesList()
@@ -143,7 +142,9 @@ function App() {
   }
 
   function handleSearchSavedMovies(inputs) {
-    JSON.stringify(savedMovies) !== '{}'
+    setIsWaitingResponse(true);
+
+    savedMovies.length
       ? setFilteredSavedMovies(filterMovies(inputs, savedMovies))
       : getSavedMovies()
           .then((movies) => {setFilteredSavedMovies(filterMovies(inputs, movies))})
@@ -181,7 +182,6 @@ function App() {
   }
 
   function getSavedMovies() {
-    setServerError('');
 
     return mainApi.getSavedMovies(currentToken)
       .then((data) => {
@@ -189,7 +189,7 @@ function App() {
         return data;
       })
       .catch((err) => {
-        setServerError(err);
+        setApiError(err);
         console.log(`Ошибка: ${err}`)
       });
   }
@@ -209,7 +209,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    JSON.stringify(filteredMovies) !== '{}' &&
+    filteredMovies.length &&
     setFilteredMovies(expandMoviesList(filteredMovies))
 
   }, [savedMovies]);
@@ -232,11 +232,11 @@ function App() {
 
   React.useEffect(() => {
     setIsWaitingResponse(false);
-  });
+  },[filteredSavedMovies, filteredMovies, currentUser, apiError]);
 
   React.useEffect(() => {
-    isWaitingResponse && setServerError('');
-  },[isWaitingResponse])
+    isWaitingResponse && setApiError('');
+  },[isWaitingResponse]);
 
   return (
     <div className="App">
@@ -249,7 +249,7 @@ function App() {
             {loggedIn ? <Redirect to="/movies" /> :
               <Register
                 onRegisterUser={handleRegisterUser}
-                serverError={serverError}
+                serverError={apiError}
               />
             }
           </Route>
@@ -258,7 +258,7 @@ function App() {
             {loggedIn ? <Redirect to="/movies" /> :
               <Login
                 onLoginUser={handleLoginUser}
-                serverError={serverError}
+                serverError={apiError}
               />
             }
           </Route>
@@ -279,15 +279,18 @@ function App() {
                   onSearchMovies={handleSearchMovies}
                   onSavingMovies={handleSavingMovie}
                   onUnSavingMovies={handleUnSavingMovie}
-                  serverError={serverError}
+                  serverError={apiError}
                 />
               </ProtectedRoute>
 
               <ProtectedRoute path="/saved-movies"  loggedIn={loggedIn}>
                 <SavedMovies
-                  savedMovies={filteredSavedMovies}
+                  savedMovies={savedMovies}
+                  filteredSavedMovies={filteredSavedMovies}
                   onUnSavingMovies={handleUnSavingMovie}
                   onSearchMovies={handleSearchSavedMovies}
+                  isWaitingResponse={isWaitingResponse}
+                  serverError={apiError}
                 />
               </ProtectedRoute>
 
@@ -296,7 +299,8 @@ function App() {
                   isNestedForm={true}
                   onSignOut={handleExitUser}
                   onUpdateUser={handleUpdateUser}
-                  serverError={serverError}
+                  serverError={apiError}
+                  isWaitingResponse={isWaitingResponse}
                 />
               </ProtectedRoute>
 

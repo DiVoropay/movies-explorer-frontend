@@ -1,13 +1,38 @@
 import './SavedMovies.css';
 
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader'
 import React from 'react';
 
-function Movies({ onSearchMovies, isWaitingResponse, savedMovies, onUnSavingMovies }) {
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Preloader from '../Preloader/Preloader';
+import DataNotFound from '../DataNotFound/DataNotFound';
+
+function SavedMovies({
+    onSearchMovies,
+    isWaitingResponse,
+    savedMovies,
+    filteredSavedMovies,
+    onUnSavingMovies,
+    serverError
+  }) {
+
+  const [ findError, setFindError ] = React.useState('');
+
+  React.useEffect(() => {
+    if (serverError !== '') {
+      setFindError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+    } else if (!filteredSavedMovies.length) {
+      setFindError('Ничего не найдено')
+    }
+
+  },[isWaitingResponse]);
 
   React.useEffect(()=> {
+    onSearchMovies({phrase:'', isShort: false});
+  },[savedMovies]);
+
+  React.useEffect(()=> {
+    setFindError('')
     onSearchMovies({phrase:'', isShort: false});
   },[]);
 
@@ -20,17 +45,19 @@ function Movies({ onSearchMovies, isWaitingResponse, savedMovies, onUnSavingMovi
       />
 
       {isWaitingResponse && <Preloader /> }
-      {savedMovies.length ?
+      {filteredSavedMovies.length ?
         <MoviesCardList
-          moviesCards={savedMovies}
+          moviesCards={filteredSavedMovies}
           isSavedMoviesPage={true}
           onUnSavingMovies={onUnSavingMovies}
         />
-        : null
+        : <DataNotFound
+            message={findError}
+        />
       }
 
     </main>
   );
 }
 
-export default Movies;
+export default SavedMovies;

@@ -4,19 +4,38 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../images/logo.svg';
+import errorHandler from '../../utils/errorHandler';
 
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
+import Preloader from '../Preloader/Preloader';
 
-function Form({ name, title, inputs, textBtn, children, onSubmit, serverError, isNestedForm }) {
+function Form({
+    name,
+    title,
+    inputs,
+    textBtn,
+    children,
+    onSubmit,
+    serverError,
+    isNestedForm,
+    isWaitingResponse
+  }) {
 
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const [isFirstRender, setIsFirstRender] = React.useState(true);
+
+  const { values, handleChange, defaultChange, errors, isValid } = useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsFirstRender(false)
     onSubmit({
       ...values
     });
   }
+
+  React.useEffect(() => {
+    defaultChange(inputs);
+  },[])
 
   return (
     <form className="form" name={name} onSubmit={handleSubmit} noValidate>
@@ -35,8 +54,8 @@ function Form({ name, title, inputs, textBtn, children, onSubmit, serverError, i
           <label className={`form__field${isNestedForm ? ' form__field_nested-form' : ''}`}>
             <h3 className={`form__field-name${isNestedForm ? ' form__field-name_nested-form' : ''}`}>{item.title}</h3>
             <input className={`form__input${isNestedForm ? ' form__input_nested-form' : ''}`}
-              onChange={handleChange}
-              value={values[item.name] === undefined ? item.value : values[item.name]}
+              onInput={handleChange}
+              value={values[item.name]}
               type={item.type}
               name={item.name}
               required={item.required}
@@ -49,8 +68,9 @@ function Form({ name, title, inputs, textBtn, children, onSubmit, serverError, i
       })}
 
       {children}
+      {isWaitingResponse && <Preloader /> }
 
-      <span className="form__error">{serverError}</span>
+      <span className="form__error">{(!isFirstRender || !isWaitingResponse) ? errorHandler(serverError) : ''}</span>
       <button className={`form__button-submit${isNestedForm ? ' form__button-submit_nested-form' : ''}`} disabled={!isValid} type="submit">
         {textBtn}
       </button>

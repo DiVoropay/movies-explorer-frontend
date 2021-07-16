@@ -17,6 +17,10 @@
   font-weight: 500;
 }
 
+.navigation__link:hover {
+  opacity: .8;
+}
+
 .navigation__navlink {
   color: #fff;
   margin-left: 20px;
@@ -24,6 +28,10 @@
   font-size: 14px;
   line-height: 1.21;
   font-weight: 400;
+}
+
+.navigation__navlink:hover {
+  opacity: .8;
 }
 
 .navigation__navlink-main {
@@ -76,6 +84,11 @@
   background-image: url('../../images/nav-menu-button.svg');
 }
 
+.navigation__menu-button:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
 .navigation__close-button {
   display: none;
   border: none;
@@ -84,6 +97,11 @@
   height: 44px;
   background-repeat: no-repeat;
   background-image: url('../../images/close-icon.svg');
+}
+
+.navigation__close-button:hover {
+  cursor: pointer;
+  opacity: .8;
 }
 
 @media screen and (max-width: 768px)  {

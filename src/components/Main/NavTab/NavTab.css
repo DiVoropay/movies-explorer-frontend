@@ -20,6 +20,11 @@
   font-weight: 500;
 }
 
+.nav-tab__link:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
 @media screen and (max-width: 480px)  {
   .nav-tab__link {
     font-size: 11px;

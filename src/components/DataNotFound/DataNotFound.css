@@ -3,11 +3,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .data-not-found__code {
   margin: 0;
-  font-size: 140px;
+  font-size: 50px;
   line-height: 1.21;
   font-weight: 400;
 
@@ -22,7 +23,6 @@
 
 @media screen and (max-width: 480px)  {
   .data-not-found__code {
-    margin-top: calc(40vh - 40px);
     font-size: 80px;
   }
 

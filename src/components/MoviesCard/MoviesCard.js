@@ -27,7 +27,7 @@ function MoviesCard({
         {duration}
       </p>
       <img className="movies-card__image" src={imageLink} alt={name} />
-      <a className="movies-card__trailer" href={trailerLink} rel="noreferrer" target="_blank" title="Перейти к просмотру трейлера"></a>
+      <a className="movies-card__trailer" href={trailerLink} rel="noreferrer" target="_blank" title="Перейти к просмотру трейлера">{null}</a>
       <button className={
         `movies-card__button
         ${movieСard.isSaved && !isSavedMoviesPage ? ' movies-card__button_saved' : ''}
