@@ -30,9 +30,9 @@ function SavedMovies({
 
   React.useEffect(()=> {
     if (pastInputs) {
-      onSearchMovies({ phrase: pastInputs.phrase, isShort: pastInputs.isShort});
+      savedMovies.length && onSearchMovies({ phrase: pastInputs.phrase, isShort: pastInputs.isShort});
     } else {
-      onSearchMovies({ phrase:'', isShort: false });
+      savedMovies.length && onSearchMovies({ phrase:'', isShort: false });
     }
   },[savedMovies]);
 
