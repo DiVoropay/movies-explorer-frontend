@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import Form from '../Form/Form'
 
-function Login({ onLoginUser, serverError }) {
+function Login({ onLoginUser, serverError, isWaitingResponse }) {
 
   return (
     <div className="login">
@@ -15,6 +15,7 @@ function Login({ onLoginUser, serverError }) {
         textBtn="Войти"
         onSubmit={onLoginUser}
         serverError={serverError}
+        isWaitingResponse={isWaitingResponse}
         inputs={[
           {
           title: 'E-mail',

@@ -252,6 +252,7 @@ function App() {
               <Register
                 onRegisterUser={handleRegisterUser}
                 serverError={apiError}
+                isWaitingResponse={isWaitingResponse}
               />
             }
           </Route>
@@ -261,6 +262,7 @@ function App() {
               <Login
                 onLoginUser={handleLoginUser}
                 serverError={apiError}
+                isWaitingResponse={isWaitingResponse}
               />
             }
           </Route>

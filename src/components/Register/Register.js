@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import Form from '../Form/Form'
 
-function Register({ onRegisterUser, serverError }) {
+function Register({ onRegisterUser, serverError, isWaitingResponse }) {
 
   return (
     <div className="register">
@@ -15,6 +15,7 @@ function Register({ onRegisterUser, serverError }) {
         textBtn="Зарегестрироваться"
         onSubmit={onRegisterUser}
         serverError={serverError}
+        isWaitingResponse={isWaitingResponse}
         inputs={[
           {
           title: 'Имя',
