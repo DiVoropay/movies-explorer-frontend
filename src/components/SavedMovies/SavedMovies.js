@@ -13,7 +13,8 @@ function SavedMovies({
     savedMovies,
     filteredSavedMovies,
     onUnSavingMovies,
-    serverError
+    serverError,
+    pastInputs
   }) {
 
   const [ findError, setFindError ] = React.useState('');
@@ -28,13 +29,12 @@ function SavedMovies({
   },[isWaitingResponse]);
 
   React.useEffect(()=> {
-    onSearchMovies({phrase:'', isShort: false});
+    if (pastInputs) {
+      onSearchMovies({ phrase: pastInputs.phrase, isShort: pastInputs.isShort});
+    } else {
+      onSearchMovies({ phrase:'', isShort: false });
+    }
   },[savedMovies]);
-
-  React.useEffect(()=> {
-    setFindError('')
-    onSearchMovies({phrase:'', isShort: false});
-  },[]);
 
   return (
     <main className="saved-movies">
@@ -42,6 +42,7 @@ function SavedMovies({
       <SearchForm
         onSearchMovies={onSearchMovies}
         isSavedMoviesPage={true}
+        pastInputs={pastInputs}
       />
 
       {isWaitingResponse && <Preloader /> }

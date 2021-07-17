@@ -12,7 +12,8 @@ function Movies({
     isWaitingResponse,
     onSavingMovies,
     onUnSavingMovies,
-    serverError
+    serverError,
+    pastInputs
   }) {
 
   const [ findError, setFindError ] = React.useState('');
@@ -20,7 +21,7 @@ function Movies({
   React.useEffect(() => {
     if (serverError !== '') {
       setFindError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
-    } else if (!filteredMovies.length) {
+    } else if (!filteredMovies.length && !isWaitingResponse) {
       setFindError('Ничего не найдено')
     }
 
@@ -35,6 +36,7 @@ function Movies({
 
       <SearchForm
         onSearchMovies={onSearchMovies}
+        pastInputs={pastInputs}
       />
       {isWaitingResponse && <Preloader /> }
       {filteredMovies.length ?

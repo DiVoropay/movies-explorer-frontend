@@ -2,7 +2,7 @@ import './SearchForm.css';
 
 import React from 'react';
 
-function SearchForm({ onSearchMovies, isSavedMoviesPage }) {
+function SearchForm({ onSearchMovies, isSavedMoviesPage, pastInputs }) {
 
   const [ phrase, setPhrase ] = React.useState('');
   const [ isShort, setIsShort ] = React.useState(false);
@@ -19,7 +19,7 @@ function SearchForm({ onSearchMovies, isSavedMoviesPage }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (phrase) {
+    if (phrase || isSavedMoviesPage) {
       onSearchMovies({ phrase, isShort });
     } else {
       setError('Нужно ввести ключевое слово');
@@ -33,6 +33,14 @@ function SearchForm({ onSearchMovies, isSavedMoviesPage }) {
     }
   },[isShort])
 
+  React.useEffect(() => {
+    if (pastInputs) {
+      onSearchMovies(pastInputs);
+      setPhrase(pastInputs.phrase);
+      setIsShort(pastInputs.isShort);
+    }
+  },[])
+
   return (
     <form className="search-form" name="search-form">
 
@@ -40,7 +48,7 @@ function SearchForm({ onSearchMovies, isSavedMoviesPage }) {
         className="search-form__input"
         placeholder="Фильм"
         onChange={handleChangePhrase}
-        value={phrase}
+        value={ phrase }
         type="text"
         name="phrase"
         required />
@@ -53,6 +61,7 @@ function SearchForm({ onSearchMovies, isSavedMoviesPage }) {
           className="switcher__checkbox"
           type="checkbox"
           onChange={handleChangeSwitcher}
+          checked={ isShort }
           name="isShort"
           disabled={(!isSavedMoviesPage && !phrase) ? true : false}
         />

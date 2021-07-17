@@ -132,6 +132,7 @@ function App() {
 
   function handleSearchMovies(inputs) {
     setIsWaitingResponse(true);
+    localStorage.setItem('search-movies-inputs', JSON.stringify(inputs));
 
     if (moviesList.length) {
       setFilteredMovies(expandMoviesList(filterMovies(inputs, moviesList)));
@@ -143,6 +144,7 @@ function App() {
 
   function handleSearchSavedMovies(inputs) {
     setIsWaitingResponse(true);
+    localStorage.setItem('search-saved-movies-inputs', JSON.stringify(inputs));
 
     savedMovies.length
       ? setFilteredSavedMovies(filterMovies(inputs, savedMovies))
@@ -280,6 +282,7 @@ function App() {
                   onSavingMovies={handleSavingMovie}
                   onUnSavingMovies={handleUnSavingMovie}
                   serverError={apiError}
+                  pastInputs={JSON.parse(localStorage.getItem('search-movies-inputs'))}
                 />
               </ProtectedRoute>
 
@@ -291,6 +294,7 @@ function App() {
                   onSearchMovies={handleSearchSavedMovies}
                   isWaitingResponse={isWaitingResponse}
                   serverError={apiError}
+                  pastInputs={JSON.parse(localStorage.getItem('search-saved-movies-inputs'))}
                 />
               </ProtectedRoute>
 
