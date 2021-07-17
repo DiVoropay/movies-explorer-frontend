@@ -98,6 +98,8 @@ function App() {
   function handleExitUser() {
     localStorage.removeItem('token');
     localStorage.removeItem('movies-list');
+    localStorage.removeItem('search-movies-inputs');
+    localStorage.removeItem('search-saved-movies-inputs');
     setLoggedIn(false);
   }
 
