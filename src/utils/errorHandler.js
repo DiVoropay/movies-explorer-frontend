@@ -13,6 +13,8 @@ function errorHandler(serverError) {
 
       case ('Ошибка 401'): return 'При загрузке данных пользователя произошла ошибка';
 
+      case (''): return 'Успешно!';
+
       default: return serverError;
     }
 

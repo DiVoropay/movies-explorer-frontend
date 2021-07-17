@@ -70,8 +70,8 @@ function Form({
       {children}
       {isWaitingResponse && <Preloader /> }
 
-      <span className="form__error">{(!isFirstRender || !isWaitingResponse) ? errorHandler(serverError) : ''}</span>
-      <button className={`form__button-submit${isNestedForm ? ' form__button-submit_nested-form' : ''}`} disabled={!isValid} type="submit">
+      <span className="form__error">{(!isFirstRender && !isWaitingResponse) ? errorHandler(serverError) : ''}</span>
+      <button className={`form__button-submit${isNestedForm ? ' form__button-submit_nested-form' : ''}`} disabled={!isValid || isWaitingResponse} type="submit">
         {textBtn}
       </button>
     </form>
