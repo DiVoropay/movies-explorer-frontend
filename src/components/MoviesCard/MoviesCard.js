@@ -1,21 +1,22 @@
 import './MoviesCard.css';
 
-function MoviesCard({ movieСard, isSavedMoviesPage, isSaved }) {
-
+function MoviesCard({
+    movieСard,
+    isSavedMoviesPage,
+    onSavingMovies,
+    onUnSavingMovies
+  })
+  {
   const name = movieСard.nameRU;
   const duration = `${Math.round(movieСard.duration / 60)}:${('00' + movieСard.duration % 60).slice(-2,4)}`;
-  const imageLink = `https://api.nomoreparties.co${movieСard.image.url}`;
+  const imageLink = movieСard.image;
+  const trailerLink = movieСard.trailer;
 
-  function handleSaveClick() {
-    isSaved = !isSaved;
-    console.log(isSaved);
+  function handleClickSaveButton() {
+    isSavedMoviesPage
+      ? onUnSavingMovies(movieСard)
+      : movieСard.isSaved ? onUnSavingMovies(movieСard) : onSavingMovies({ ...movieСard, isSaved: undefined, _id: undefined });
   }
-
-  function rondomLike() {
-    isSaved = Boolean(Math.round(Math.random()));
-  }
-
-  rondomLike();
 
   return (
     <article className="movies-card">
@@ -26,13 +27,14 @@ function MoviesCard({ movieСard, isSavedMoviesPage, isSaved }) {
         {duration}
       </p>
       <img className="movies-card__image" src={imageLink} alt={name} />
+      <a className="movies-card__trailer" href={trailerLink} rel="noreferrer" target="_blank" title="Перейти к просмотру трейлера">{null}</a>
       <button className={
         `movies-card__button
-        ${isSaved && !isSavedMoviesPage ? ' movies-card__button_saved' : ''}
-        ${!isSaved && !isSavedMoviesPage ? ' movies-card__button_unsaved' : ''}
+        ${movieСard.isSaved && !isSavedMoviesPage ? ' movies-card__button_saved' : ''}
+        ${!movieСard.isSaved && !isSavedMoviesPage ? ' movies-card__button_unsaved' : ''}
         ${isSavedMoviesPage ? ' movies-card__button_remove' : ''}`
         }
-        onClick={handleSaveClick} type="button"></button>
+        onClick={handleClickSaveButton} type="button"></button>
     </article>
   );
 }

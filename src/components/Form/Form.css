@@ -29,9 +29,9 @@
 .form__field {
   display: flex;
   flex-direction: column;
-  margin: 0 0 24px;
-  border-bottom: 1px solid #424242;
+  margin: 0 0 12px;
   width: 100%;
+  position: relative;
 }
 
 .form__field_nested-form {
@@ -39,6 +39,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: stretch;
+  border-bottom: 1px solid #424242;
 }
 
 .form__field-name {
@@ -55,29 +56,57 @@
 
 .form__input {
   background-color: transparent;
-  border: none;
   padding: 0;
-  margin: 5px 0 10px;
   font-size: 14px;
-  line-height: 1.21;
+  line-height: 32px;
   font-weight: 400;
   color: #fff;
   width: 100%;
+  border: none;
+  border-bottom: 1px solid #424242;
 }
 
 .form__input_nested-form {
   text-align: end;
   margin-right: 0;
   justify-content: end;
+  border: none;
 }
 
 .form__tip {
-  color: red;
+  font-size: 10px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: #EE3465;
+
+}
+
+.form__tip_nested-form {
+  position: absolute;
+  left: 0;
+  top: 35px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.form__tip_nested-form:hover {
+  overflow: visible;
+  height: fit-content;
+  background-color: #313131;
+  border-radius: 3px;
+  z-index: 4;
+}
+
+.form__error {
+  margin: auto auto 0;
+  font-size: 12px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: #EE3465;
 }
 
 .form__button-submit {
-  justify-self: end;
-  margin: auto 0 16px;
+  margin: 10px 0 16px;
   width: 396px;
   min-height: 45px;
   background-color: #4285f4;
@@ -90,14 +119,24 @@
   color: #fff;
 }
 
-.form__button-submit :hover {
-  cursor: move;
+.form__button-submit:disabled {
+  background-color: #313131;
+  color: #8b8b8b;
+}
+
+.form__button-submit:enabled:hover {
+  cursor: pointer;
+  opacity: .8;
 }
 
 .form__button-submit_nested-form {
   background-color: transparent;
   width: auto;
   min-height: auto;
+}
+
+.form__button-submit_nested-form:disabled {
+  background-color: transparent;
 }
 
 @media screen and (max-width: 480px)  {
@@ -116,6 +155,10 @@
   .form__button-submit {
     width: 240px;
     font-size: 12px;
+  }
+
+  .form__tip {
+    width: 240px;
   }
 
 }

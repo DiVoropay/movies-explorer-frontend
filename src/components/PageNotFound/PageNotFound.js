@@ -1,9 +1,9 @@
-import './PageNoteFound.css';
+import './PageNotFound.css';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function PageNoteFound() {
+function PageNotFound() {
 
   return (
     <div className="page-not-found">
@@ -14,4 +14,4 @@ function PageNoteFound() {
   );
 }
 
-export default PageNoteFound;
+export default PageNotFound;

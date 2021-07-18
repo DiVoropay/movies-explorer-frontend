@@ -5,26 +5,7 @@ import { Link } from 'react-router-dom';
 
 import Form from '../Form/Form'
 
-function Login({ onRegisterUser }) {
-
-  const [email, setEmail] = React.useState();
-  const [password, setPassword] = React.useState();
-
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onRegisterUser({
-      password,
-      email
-    });
-  }
+function Login({ onLoginUser, serverError, isWaitingResponse }) {
 
   return (
     <div className="login">
@@ -32,35 +13,27 @@ function Login({ onRegisterUser }) {
         name="login"
         title="Рады видеть!"
         textBtn="Войти"
-        onSubmit={handleSubmit}>
-
-          <label className="form__field">
-            <h3 className="form__field-name">E-mail</h3>
-            <input className="form__input"
-              onChange={handleChangeEmail}
-              value={email || ''}
-              type="email"
-              name="email"
-              minLength="5"
-              maxLength="40"
-              required
-            />
-            <span className="form__tip"></span>
-          </label>
-
-          <label className="form__field">
-            <h3 className="form__field-name">Пароль</h3>
-            <input className="form__input"
-              onChange={handleChangePassword}
-              value={password || ''}
-              type="password"
-              name="password"
-              minLength="4"
-              maxLength="16"
-              required
-            />
-            <span className="form__tip"></span>
-          </label>
+        onSubmit={onLoginUser}
+        serverError={serverError}
+        isWaitingResponse={isWaitingResponse}
+        inputs={[
+          {
+          title: 'E-mail',
+          type: 'email',
+          name: 'email',
+          required: 'required',
+          minLength: '5',
+          maxLength: '40'
+          },
+          {
+          title: 'Пароль',
+          type: 'password',
+          name: 'password',
+          required: 'required',
+          minLength: '4',
+          maxLength: '16'
+          }
+        ]}>
 
       </Form>
       <div className="login__question">

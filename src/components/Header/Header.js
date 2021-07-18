@@ -1,21 +1,21 @@
 import './Header.css';
 import logo from '../../images/logo.svg';
 
-import { Link, useHistory  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Navigation from '../Navigation/Navigation';
 
-function Header() {
-  const history = useHistory();
-  const location = history.location.pathname;
+function Header({ pathname, loggedIn }) {
 
   return (
-    <header className={`header ${ location === '/' ? ' header__main' : ''}`}>
+    <header className={`header ${ pathname === '/' ? ' header__main' : ''}`}>
         <Link to="/">
           <img className="header__logo" src={logo} alt="Логотип" />
         </Link>
 
-        <Navigation />
+        <Navigation
+          loggedIn={loggedIn}
+        />
     </header>
   );
 }

@@ -35,11 +35,18 @@
 }
 
 .movies-card__image {
+  position: relative;
   justify-self: center;
   grid-area: image;
   overflow: hidden;
   max-height: 200px;
   max-width: 100%;
+}
+
+.movies-card__trailer {
+  grid-area: image;
+  height: 100%;
+  z-index: 2;
 }
 
 .movies-card__button {
@@ -57,6 +64,11 @@
   line-height: 1;
   font-weight: 400;
   color: #fff;
+}
+
+.movies-card__button:hover {
+  cursor: pointer;
+  opacity: .8;
 }
 
 .movies-card__button_unsaved::before {
